@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DungeonExplorer
 {
     public class Player
-    {
+    { // Stats:
         public string Name { get; private set; }
         private int health;
         internal Item inventoryItem;
@@ -36,6 +36,7 @@ namespace DungeonExplorer
             
         }
         public void PickUpItem(Item newItem)
+        /* Pick up item if inventory is empty */
         {
             if (inventoryItem == null)
             {
@@ -49,6 +50,7 @@ namespace DungeonExplorer
         }
 
         public void UseItem()
+        /* Use an item available to the player */
         {
             if (inventoryItem == null)
             {
@@ -67,6 +69,7 @@ namespace DungeonExplorer
         }
 
         public void NextRoom()
+        /* Used for functionality settings when player is moved to next room */
         {
             FirstRoom = false;
         }

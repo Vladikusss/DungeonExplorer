@@ -6,8 +6,9 @@ namespace DungeonExplorer
 {
     public class Room
     {
+        // List of all rooms
         private static List<Room> rooms = new List<Room>
-        {
+        {   
             new Room("Large fountain of glowing red liquid can be seen in this room."),
             new Room("Dusty old books are on the shelf of this library."),
             new Room("An empty room with spider web around."),
@@ -21,18 +22,19 @@ namespace DungeonExplorer
         private string description;
         
 
-        public Room(string description)
+        public Room(string description) // Assign description
         {
             this.description = description;
         }
 
-        public string GetDescription()
+        public string GetDescription() // Return description
         {
             return description;
         }
 
         public static Room GetNewRoom(Room previousRoom)
-        {
+        /* Return random room that is not the same room */
+        { 
             Room newRoom;
             do
             {

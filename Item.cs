@@ -5,11 +5,12 @@ using System.ComponentModel.Design.Serialization;
 
 namespace DungeonExplorer
 {
-    
+    // Item type and rarity through enumeration
     public enum ItemType { HealSpell, IgnoranceSpell, EliminationSpell, Weapon}
     public enum Rarity { Common, Rare, Legendary }
     
     public class Item
+    /* Represents object player can use */
     {
         public string Name { get; }
         public ItemType Type { get; }
@@ -17,6 +18,7 @@ namespace DungeonExplorer
         public static bool skipBattle { get; set; }
 
         public Item(string name, ItemType type, Rarity rarity)
+        /* Item initialisation */
         {
             Name = name;
             Type = type;
@@ -24,6 +26,7 @@ namespace DungeonExplorer
         }
 
         public void UseItem(Player player)
+        /* Function to use an item based on its type */
         {
             
             if (player.inventoryItem == null)

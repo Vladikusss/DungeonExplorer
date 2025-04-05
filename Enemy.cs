@@ -13,6 +13,7 @@ namespace DungeonExplorer
         
         private static Random rndm = new Random();
 
+        // Assign properties based on enemy type
         public Enemy(EnemyClass type)
         {
             switch (type)
@@ -36,6 +37,7 @@ namespace DungeonExplorer
             
         }
 
+        // Deduct damage from enemy's health
         public void TakeDamage(int damage)
         {
             Health -= damage;
@@ -46,6 +48,7 @@ namespace DungeonExplorer
             
         }
 
+        // Check if enemy is alive
         public bool Alive()
         {
             return Health > 0;

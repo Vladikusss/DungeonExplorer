@@ -14,6 +14,7 @@ namespace DungeonExplorer
 
 
         private void RestartGame()
+        /* Function to see if player wants to start again */
         {
             Console.WriteLine("\nDo you want to restart the game? y/n");
             string choice  = Console.ReadLine();
@@ -32,6 +33,7 @@ namespace DungeonExplorer
             }
         }
         public List<Enemy> GenerateEnemies()
+        /* Generate random 3 enemies */
         {
             Random rndm = new Random();
             List<Enemy> enemies = new List<Enemy>();
@@ -46,6 +48,7 @@ namespace DungeonExplorer
             return enemies;
         }
         public void Enemies()
+        /* Function to fight enemies */
         {
             if (Item.skipBattle)
             {
@@ -126,6 +129,7 @@ namespace DungeonExplorer
         }
 
         private void EnemyAttacks(List<Enemy> enemies)
+        /* Function to receive enemy's attacks */
         {
             foreach (var x in enemies)
             {
@@ -142,6 +146,7 @@ namespace DungeonExplorer
         }
 
         private void PlayerAttacks(List<Enemy> enemies)
+        /* Function to send player's attacks */
         {
             Random rndm = new Random();
             int defaultDamage = 10;
@@ -194,8 +199,9 @@ namespace DungeonExplorer
 
 
         }
-
+        
         private void createItems()
+        /* Function to create a list of available items */
         {
             possibleItems = new List<Item>
             {
@@ -210,7 +216,9 @@ namespace DungeonExplorer
 
         }
 
+       
         private Item GetRandomItem()
+        /* Function to get a random item */
         {
             Random rndm = new Random();
             int chance = rndm.Next(1, 101);
@@ -237,6 +245,7 @@ namespace DungeonExplorer
         }
         
         public void Start()
+        /* Function to keep the game going */
         {
             Test.RunTests();
             

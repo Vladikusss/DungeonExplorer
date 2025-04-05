@@ -15,7 +15,8 @@ namespace DungeonExplorer
             Console.WriteLine("All tests executed.");
         }
 
-        private static void TestEnemyGeneration()
+        private static void TestEnemyGeneration()   
+        /* Ensure enemies are generated */
         {
             Game testGame = new Game();
             var enemies = testGame.GenerateEnemies();
@@ -24,6 +25,7 @@ namespace DungeonExplorer
         }
 
         private static void TestPlayerHealth()
+        /* Check player's stats */
         {
             Player testPlayer = new Player("Test", 100);
             Debug.Assert(testPlayer.GetHealth() == 100, "Health is not 100.");
@@ -33,6 +35,7 @@ namespace DungeonExplorer
         }
 
         private static void TestItemPickUp()
+        /* Check item functionality */
         {
             Player testPlayer = new Player("Test", 100);
             Item testItem = new Item("Knife", ItemType.Weapon, Rarity.Rare);
