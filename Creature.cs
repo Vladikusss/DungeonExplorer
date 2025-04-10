@@ -1,8 +1,9 @@
 using System;
+using DungeonExplorer.Interfaces;
 
 namespace DungeonExplorer
 {
-    public abstract class Creature
+    public abstract class Creature : IDamageable
     /* Base clase for player & enemies to implement shared logic */
     {
         // Shared attributes:
@@ -20,7 +21,7 @@ namespace DungeonExplorer
         public abstract void Attack(Creature target); // Implemented differently by each subclass
 
         public void TakeDamage(int damage)
-        { // Function to decrease health after taking damage
+        { 
             Health -= damage;
             if (Health <= 0)
             {
@@ -30,7 +31,7 @@ namespace DungeonExplorer
         }
 
         public bool IsAlive()
-        { // Function to check if creature is alive
+        {
             return Health > 0;
         }
         

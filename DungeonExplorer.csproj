@@ -46,6 +46,8 @@
     <Compile Include="Creature.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Interfaces\ICollectible.cs" />
+    <Compile Include="Interfaces\IDamageable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Potion.cs" />

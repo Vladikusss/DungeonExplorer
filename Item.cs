@@ -1,15 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-
+using DungeonExplorer.Interfaces;
 
 namespace DungeonExplorer
 {
-    public abstract class Item
+    public abstract class Item : ICollectible
     { /* Base class to inherit from */
         public string Name { get; set; }
 
         public Item(string name)
+            
         {
             Name = name;
         }
