@@ -4,7 +4,7 @@ namespace DungeonExplorer
 {
     public class Potion : Item
     {
-        public int HealAmount {get; set;}
+        public int HealAmount { get; set; }
 
         public Potion(string name, int healAmount) : base(name)
         {
@@ -14,6 +14,11 @@ namespace DungeonExplorer
         public override void UseItem(Player player)
         {
             Console.WriteLine($"{player.Name} uses {Name} and gets {HealAmount} hp. Current Health: {player.Health}");
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} (Heals: {HealAmount})";
         }
     }
 }

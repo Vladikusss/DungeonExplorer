@@ -16,5 +16,11 @@ namespace DungeonExplorer
             Console.WriteLine($"{player.Name} equips {Name} and prepares to deal {Damage} damage.");
             // Damage logic need to be applied here
         }
+        
+        public override string ToString()
+        {
+            return $"{Name} (Damage: {Damage})";
+        }
+
     }
 }

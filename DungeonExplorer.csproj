@@ -48,6 +48,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\ICollectible.cs" />
     <Compile Include="Interfaces\IDamageable.cs" />
+    <Compile Include="Interfaces\IInventory.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Potion.cs" />

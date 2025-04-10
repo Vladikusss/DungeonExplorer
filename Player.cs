@@ -5,11 +5,11 @@ namespace DungeonExplorer
 {
     public class Player : Creature 
     { /* Inherit from the base class */
-        public List<Item> Inventory {get; set;}
+        public Inventory PlayerInventory {get; set;}
 
         public Player(string name, int health) : base(name, health) // Inherits properties from parent class    
         {
-            Inventory = new List<Item>(); // Initialisation
+            PlayerInventory = new Inventory(); // Initialisation
         }
 
         public override void Attack(Creature target)
@@ -21,8 +21,7 @@ namespace DungeonExplorer
 
         public void AddItem(Item item)
         {
-            Inventory.Add(item);
-            Console.WriteLine($"{Name} picked up {item.Name}.");
+            PlayerInventory.PickUpItem(item);
         }
     }
 }
