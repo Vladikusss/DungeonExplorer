@@ -14,7 +14,7 @@ namespace DungeonExplorer
 
         public override void Attack(Creature target)
         {
-            int damage = 15; // Testing figure
+            int damage = 25; // Testing figure
             Console.WriteLine($"{Name} attacks {target.Name} dealing {damage} damage!");
             target.TakeDamage(damage);
         }
@@ -22,6 +22,11 @@ namespace DungeonExplorer
         public void AddItem(Item item)
         {
             PlayerInventory.PickUpItem(item);
+        }
+        
+        public void InventoryContent()
+        {
+            PlayerInventory.InventoryContent();
         }
     }
 }
