@@ -63,6 +63,7 @@ namespace DungeonExplorer
                     enemy.TakeDamage(damage);
                     Console.WriteLine(
                         $"You hit {enemy.Name} with {damage} damage. {enemy.Name} has {enemy.Health} HP left.");
+                }
 
                     // Enemies attack
                     if (!enemies.Any(e => e.IsAlive()))
@@ -85,14 +86,13 @@ namespace DungeonExplorer
                         Console.WriteLine("\nYou have been defeated by enemies :(");
                         Environment.Exit(0);
                     }
-                }
             }
         }
 
         private int CalculatePlayerDamage()
         {
             Random rnd = new Random();
-            int baseDamage = 15;
+            int baseDamage = player.AttackPower;
             int damage = baseDamage;
 
             if (rnd.Next(100) < 37) // 37% chance for critical hit
@@ -121,8 +121,9 @@ namespace DungeonExplorer
             {
                 Console.WriteLine("\nMenu:");
                 Console.WriteLine("1. Go to the next room");
-                Console.WriteLine("2. Review inventory and health");
-                Console.WriteLine("3. Exit game");
+                Console.WriteLine("2. Use item from inventory");
+                Console.WriteLine("3. Fight straightaway");
+                Console.WriteLine("4. Exit game");
 
                 string choice = Console.ReadLine();
 
@@ -130,13 +131,14 @@ namespace DungeonExplorer
                 {
                     case "1":
                         GoToNextRoom();
-                        Console.WriteLine("You went to the next room.");
                         break;
                     case "2":
-                        Console.WriteLine($"Health: {player.Health}");
-                        player.InventoryContent();
+                        player.PlayerInventory.UseItemFromInventory(player);
                         break;
                     case "3":
+                        Fight();
+                        break;
+                    case "4":
                         Environment.Exit(0);
                         break;
                     default:
@@ -149,6 +151,12 @@ namespace DungeonExplorer
         {
             currentRoom = Room.GetNewRoom(currentRoom);
             Console.WriteLine($"\nYou went to the next room.\nRoom Description: {currentRoom.GetDescription()}");
+            enemies = new List<Enemy>
+            {
+                new Enemy("Goblin", 0, 30, 5),
+                new Enemy("Orc", 25, 50, 10),
+                new Enemy("Troll", 50, 100, 15)
+            };
         }
     }
 }

@@ -67,5 +67,27 @@ namespace DungeonExplorer
                 Console.WriteLine($"{item.Name} was used and removed from your inventory.");
             }
         }
+        
+        public void UseItemFromInventory(Player player)
+        {
+            Console.WriteLine("\nInventory:");
+            InventoryContent();
+
+            Console.WriteLine("\nChoose an item to use:");
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{items.IndexOf(item) + 1}. {item}");
+            }
+
+            string choice = Console.ReadLine();
+            if (int.TryParse(choice, out int index) && index > 0 && index <= items.Count)
+            {
+                UseItem(items[index - 1].Name, player);
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please try again.");
+            }
+        }
     }
 }
