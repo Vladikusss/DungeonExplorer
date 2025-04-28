@@ -10,11 +10,6 @@
     <list default="true" id="a93ae52f-0a33-4c46-949b-53b94b53f87a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DungeonExplorer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DungeonExplorer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Potion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Potion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +85,7 @@
       <workItem from="1744073226087" duration="704000" />
       <workItem from="1744286806941" duration="11028000" />
       <workItem from="1744316763414" duration="685000" />
-      <workItem from="1745412429106" duration="7735000" />
+      <workItem from="1745412429106" duration="10435000" />
     </task>
     <servers />
   </component>

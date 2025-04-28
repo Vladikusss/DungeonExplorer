@@ -16,17 +16,11 @@ namespace DungeonExplorer
         {
             // Player initialisation
             player = new Player("CrazyFrog", 100);
+            player.PlayerInventory = new Inventory();
+
             
             // Room initialisation
             currentRoom = Room.rooms[new Random().Next(Room.rooms.Count)];
-
-            // Enemy initialisation
-            enemies = new List<Enemy>
-            {
-                new Enemy("Goblin", 1, 30, 5),
-                new Enemy("Skeleton", 30, 50, 15),
-                new Enemy("Zombie", 50, 75, 20)
-            };
 
             // Output player and enemy information
             Console.WriteLine($"Player: {player.Name} - Health: {player.Health}");
@@ -42,11 +36,13 @@ namespace DungeonExplorer
 
         public void Start()
         {
-            Fight();
-            if (player.IsAlive())
+            while (player.IsAlive())
             {
-                PickUpItems();
                 ShowMenu();
+                if (!player.IsAlive())
+                {
+                    break;
+                }
             }
         }
     
@@ -121,9 +117,8 @@ namespace DungeonExplorer
             {
                 Console.WriteLine("\nMenu:");
                 Console.WriteLine("1. Go to the next room");
-                Console.WriteLine("2. Use item from inventory");
-                Console.WriteLine("3. Fight straightaway");
-                Console.WriteLine("4. Exit game");
+                Console.WriteLine("2. View inventory and health");
+                Console.WriteLine("3. Exit game");
 
                 string choice = Console.ReadLine();
 
@@ -133,12 +128,9 @@ namespace DungeonExplorer
                         GoToNextRoom();
                         break;
                     case "2":
-                        player.PlayerInventory.UseItemFromInventory(player);
+                        ViewInventoryAndHealth();
                         break;
                     case "3":
-                        Fight();
-                        break;
-                    case "4":
                         Environment.Exit(0);
                         break;
                     default:
@@ -150,14 +142,23 @@ namespace DungeonExplorer
         private void GoToNextRoom()
         {
             currentRoom = Room.GetNewRoom(currentRoom);
-            Console.WriteLine($"\nYou went to the next room.\nRoom Description: {currentRoom.GetDescription()}");
-            enemies = new List<Enemy>
-            {
-                new Enemy("Goblin", 0, 30, 5),
-                new Enemy("Orc", 25, 50, 10),
-                new Enemy("Troll", 50, 100, 15)
-            };
+            Console.WriteLine($"\nYou went to the next room. Room Description: {currentRoom.GetDescription()}");
+            enemies = GenerateEnemies();
+            ShowMenuAfterRoomTransition();
         }
+        
+        private List<Enemy> GenerateEnemies()
+        {
+            Random rnd = new Random();
+            List<Enemy> newEnemies = new List<Enemy>();
+
+            newEnemies.Add(new Enemy("Goblin", rnd.Next(0, 31), 5));
+            newEnemies.Add(new Enemy("Orc", rnd.Next(26, 51), 10));
+            newEnemies.Add(new Enemy("Troll", rnd.Next(51, 101), 15));
+
+            return newEnemies;
+        }
+
     }
 }
     
