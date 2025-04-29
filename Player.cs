@@ -13,7 +13,7 @@ namespace DungeonExplorer
         {
             PlayerInventory = new Inventory(); // Initialisation
         }
-
+        
         public override void Attack(Creature target)
         {
             int damage = AttackPower; // Testing figure

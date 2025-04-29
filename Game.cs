@@ -13,9 +13,14 @@ namespace DungeonExplorer
         private List<Enemy> enemies;
         private int wins = 0; // When wins = 5 -> player wins
         private int roomsToWin; // Random number of wins needed to win the game - from 4 to 10
+        private Statistics stats;
+
 
         public Game()
         {
+            // Statistics initialisation 
+            stats = new Statistics();
+
             // Player initialisation
             player = new Player("CrazyFrog", 100);
             player.PlayerInventory = new Inventory();
@@ -31,6 +36,7 @@ namespace DungeonExplorer
             
             // Output room description
             Console.WriteLine($"\nRoom Description: {currentRoom.GetDescription()}");
+            
         }
 
         public void Start()
@@ -132,9 +138,10 @@ namespace DungeonExplorer
 
                         break;
                     case "3":
-                        ViewStats();
+                        ViewStats(); // Stats
                         break;
                     case "4":
+                        stats.DisplayStatistics(); // Stats
                         Environment.Exit(0);
                         break;
                     default:
@@ -154,8 +161,14 @@ namespace DungeonExplorer
                     // Player attacks
                     int damage = CalculatePlayerDamage();
                     enemy.TakeDamage(damage);
+                    
+                    stats.AddDamage(damage); // Stats
                     Console.WriteLine(
                         $"You hit {enemy.Name} with {damage} damage. {enemy.Name} has {enemy.Health} HP left.");
+                    if (!enemy.IsAlive())
+                    {
+                        stats.AddEnemyKilled();
+                    }
                 }
 
                     // All enemies dead
@@ -165,7 +178,8 @@ namespace DungeonExplorer
                         wins++; // Increment wins
                         if (wins >= roomsToWin)
                         {
-                            Console.WriteLine("\nCongratulations! You went through 5 rooms and won the game!");
+                            Console.WriteLine($"\nCongratulations! You went through {roomsToWin} rooms and won the game!");
+                            stats.DisplayStatistics();
                             Environment.Exit(0); // End the game
                         }
                         break;
@@ -184,6 +198,7 @@ namespace DungeonExplorer
                     if (!player.IsAlive())
                     {
                         Console.WriteLine("\nYou have been defeated by enemies :(\nYou lost the game!");
+                        stats.DisplayStatistics(); // Stats
                         Environment.Exit(0);
                     }
             }
@@ -219,7 +234,8 @@ namespace DungeonExplorer
             {
                 Random rnd = new Random();
                 int chance = rnd.Next(100) + 1;
-
+                
+                stats.AddItemFound(); // Stats
                 if (chance <= 50) // 50% equal change for both weapons
                 {
                     var knife2 = new Knife("Knife", 5);
@@ -242,16 +258,19 @@ namespace DungeonExplorer
 
             if (chance2 <= 43) // 43%
             {
+                stats.AddItemFound(); // Stats
                 var potion = new Potion("Health Potion", 30, 0);
                 player.AddItem(potion);
             }
             else if (chance2 <= 80) // 37%
             {
+                stats.AddItemFound(); // Stats
                 var potion = new AttackPotion("Attack Potion", 5);
                 player.AddItem(potion);
             }
             else // 20%
             {
+                stats.AddItemFound(); // Stats
                 var potion = new InvisiblePotion("Invisibility Potion");
                 player.AddItem(potion);
             }
@@ -262,6 +281,7 @@ namespace DungeonExplorer
         {
             Console.WriteLine($"\nPlayer's health: {player.Health}");
             player.PlayerInventory.InventoryContent();
+
         }
     }
 }
