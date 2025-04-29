@@ -7,6 +7,7 @@ namespace DungeonExplorer
     { /* Inherit from the base class */
         public Inventory PlayerInventory {get; set;}
         public int AttackPower { get; set; } = 25; // Default damage
+        public bool SkipBattle { get; set; } // Allows to skip fights with enemies
 
         public Player(string name, int health) : base(name, health) // Inherits properties from parent class    
         {

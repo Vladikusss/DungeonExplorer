@@ -10,6 +10,8 @@ namespace DungeonExplorer
 
     {
         private List<Item> items; // List to store items
+        public List<Item> Items => items; // Read-only
+
 
         public Inventory()
         {

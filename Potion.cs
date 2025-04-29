@@ -5,10 +5,12 @@ namespace DungeonExplorer
     public class Potion : Item
     {
         public int HealAmount { get; set; }
+        public int AttackAmount { get; set; }
 
-        public Potion(string name, int healAmount) : base(name)
+        public Potion(string name, int healAmount, int attackAmount) : base(name)
         {
             HealAmount = healAmount;
+            AttackAmount = attackAmount;
         }
 
         public override void UseItem(Player player)
@@ -23,7 +25,7 @@ namespace DungeonExplorer
 
         public override string ToString()
         {
-            return $"{Name} (Heals: {HealAmount})";
+            return $"{Name} (Heals: {HealAmount}, Attacks: {AttackAmount})";
         }
     }
 }

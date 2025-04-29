@@ -11,6 +11,8 @@ namespace DungeonExplorer
         private Player player;
         private Room currentRoom;
         private List<Enemy> enemies;
+        private int wins = 0; // When wins = 5 -> player wins
+        private int roomsToWin; // Random number of wins needed to win the game - from 4 to 10
 
         public Game()
         {
@@ -18,6 +20,8 @@ namespace DungeonExplorer
             player = new Player("CrazyFrog", 100);
             player.PlayerInventory = new Inventory();
 
+            // Random number of wins needed to win the game - from 4 to 10
+            roomsToWin = new Random().Next(4, 11);
             
             // Room initialisation
             currentRoom = Room.rooms[new Random().Next(Room.rooms.Count)];
@@ -69,16 +73,21 @@ namespace DungeonExplorer
                 }
             }
         }
-    
-        
+
+
         private void GoToNextRoom()
         {
             currentRoom = Room.GetNewRoom(currentRoom);
             Console.WriteLine($"\nYou went to the next room. \nRoom Description: {currentRoom.GetDescription()}");
             NextRoomMenu();
+            if (player.SkipBattle)
+            {
+                Console.WriteLine("\nYou skipped the battle and went straight to the next room.");
+                player.SkipBattle = false; // Reset
+                NextRoomMenu();
+            }
         }
-        
-        
+
         private List<Enemy> GenerateEnemies()
         {
             Random rnd = new Random();
@@ -110,7 +119,17 @@ namespace DungeonExplorer
                         player.PlayerInventory.UseItem(player);
                         break;
                     case "2":
-                        Fight();
+                        if (player.SkipBattle) // Check if player used invisible potion and skip
+                        {
+                            Console.WriteLine("\nYou sneak past the room without a sound!");
+                            player.SkipBattle = false;
+                            GoToNextRoom();
+                        }
+                        else
+                        {
+                            Fight();
+                        }
+
                         break;
                     case "3":
                         ViewStats();
@@ -143,6 +162,12 @@ namespace DungeonExplorer
                     if (!enemies.Any(e => e.IsAlive()))
                     {
                         Console.WriteLine("\nYou have defeated all enemies!");
+                        wins++; // Increment wins
+                        if (wins >= roomsToWin)
+                        {
+                            Console.WriteLine("\nCongratulations! You went through 5 rooms and won the game!");
+                            Environment.Exit(0); // End the game
+                        }
                         break;
                     }
                     
@@ -158,7 +183,7 @@ namespace DungeonExplorer
                     // Player is dead
                     if (!player.IsAlive())
                     {
-                        Console.WriteLine("\nYou have been defeated by enemies :(");
+                        Console.WriteLine("\nYou have been defeated by enemies :(\nYou lost the game!");
                         Environment.Exit(0);
                     }
             }
@@ -186,21 +211,50 @@ namespace DungeonExplorer
         private void PickUpItems()
         {
             bool sword = player.PlayerInventory.UsedWeapon("Sword");
+            bool knife = player.PlayerInventory.UsedWeapon("Knife");
+
             
-            if (player.PlayerInventory.UsedWeapon("Sword"))
+            // Give one weapon per whole game
+            if (!sword && !knife)
             {
-                Console.WriteLine("You already have a sword. You don't pick up another one.");
+                Random rnd = new Random();
+                int chance = rnd.Next(100) + 1;
+
+                if (chance <= 50) // 50% equal change for both weapons
+                {
+                    var knife2 = new Knife("Knife", 5);
+                    player.AddItem(knife2);
+                }
+                else 
+                {
+                    var sword2 = new Weapon("Sword", 10);
+                    player.AddItem(sword2);
+                }
             }
             else
             {
-                var weapon = new Weapon("Sword", 10);
-                player.AddItem(weapon);
+                Console.WriteLine("You already have a weapon. You don’t pick up another one.");
             }
             
-            var potion = new Potion("Health Potion", 30);
+            // Potion drop randomised
+            Random rnd2 = new Random();
+            int chance2 = rnd2.Next(100) + 1;
 
-            
-            player.AddItem(potion);
+            if (chance2 <= 43) // 43%
+            {
+                var potion = new Potion("Health Potion", 30, 0);
+                player.AddItem(potion);
+            }
+            else if (chance2 <= 80) // 37%
+            {
+                var potion = new AttackPotion("Attack Potion", 5);
+                player.AddItem(potion);
+            }
+            else // 20%
+            {
+                var potion = new InvisiblePotion("Invisibility Potion");
+                player.AddItem(potion);
+            }
         }
 
 

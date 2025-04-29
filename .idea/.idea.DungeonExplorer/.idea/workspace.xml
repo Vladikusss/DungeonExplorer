@@ -8,14 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a93ae52f-0a33-4c46-949b-53b94b53f87a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/AttackPotion.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InvisiblePotion.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Knife.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DungeonExplorer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DungeonExplorer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Creature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Creature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DungeonExplorer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonExplorer.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interfaces/IInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IInventory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Inventory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Potion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Potion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,20 +42,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.DungeonExplorer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Development&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.DungeonExplorer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Development",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="DungeonExplorer" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -91,7 +92,7 @@
       <workItem from="1744073226087" duration="704000" />
       <workItem from="1744286806941" duration="11028000" />
       <workItem from="1744316763414" duration="685000" />
-      <workItem from="1745412429106" duration="16336000" />
+      <workItem from="1745412429106" duration="22032000" />
     </task>
     <servers />
   </component>
