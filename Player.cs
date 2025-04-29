@@ -25,9 +25,5 @@ namespace DungeonExplorer
             PlayerInventory.PickUpItem(item);
         }
         
-        public void InventoryContent()
-        {
-            PlayerInventory.InventoryContent();
-        }
     }
 }

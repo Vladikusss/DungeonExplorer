@@ -22,13 +22,8 @@ namespace DungeonExplorer
             // Room initialisation
             currentRoom = Room.rooms[new Random().Next(Room.rooms.Count)];
 
-            // Output player and enemy information
+            // Output player information
             Console.WriteLine($"Player: {player.Name} - Health: {player.Health}");
-
-            foreach (var enemy in enemies)
-            {
-                Console.WriteLine($"Enemy: {enemy.Name} - Health: {enemy.Health} - Damage: {enemy.Damage}");
-            }
             
             // Output room description
             Console.WriteLine($"\nRoom Description: {currentRoom.GetDescription()}");
@@ -45,10 +40,93 @@ namespace DungeonExplorer
                 }
             }
         }
-    
+        
+        private void ShowMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nMenu:");
+                Console.WriteLine("1. Go to the next room");
+                Console.WriteLine("2. View inventory and health");
+                Console.WriteLine("3. Exit game");
 
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        GoToNextRoom();
+                        break;
+                    case "2":
+                        ViewStats();
+                        break;
+                    case "3":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
+    
+        
+        private void GoToNextRoom()
+        {
+            currentRoom = Room.GetNewRoom(currentRoom);
+            Console.WriteLine($"\nYou went to the next room. \nRoom Description: {currentRoom.GetDescription()}");
+            NextRoomMenu();
+        }
+        
+        
+        private List<Enemy> GenerateEnemies()
+        {
+            Random rnd = new Random();
+            List<Enemy> newEnemies = new List<Enemy>();
+
+            newEnemies.Add(new Enemy("Goblin", 0, 31, 5));
+            newEnemies.Add(new Enemy("Skeleton", 26, 51, 10));
+            newEnemies.Add(new Enemy("Zombie", 51, 101, 15));
+
+            return newEnemies;
+        }
+
+        
+        private void NextRoomMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nYour options are:");
+                Console.WriteLine("1. Use item from inventory");
+                Console.WriteLine("2. Fight straightaway");
+                Console.WriteLine("3. View inventory and health");
+                Console.WriteLine("4. Exit game");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        player.PlayerInventory.UseItem(player);
+                        break;
+                    case "2":
+                        Fight();
+                        break;
+                    case "3":
+                        ViewStats();
+                        break;
+                    case "4":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
         private void Fight()
         {
+            enemies = GenerateEnemies();
             while (player.IsAlive() && enemies.Any(e => e.IsAlive()))
             {
                 Console.WriteLine("\nPlayer's turn:");
@@ -61,13 +139,14 @@ namespace DungeonExplorer
                         $"You hit {enemy.Name} with {damage} damage. {enemy.Name} has {enemy.Health} HP left.");
                 }
 
-                    // Enemies attack
+                    // All enemies dead
                     if (!enemies.Any(e => e.IsAlive()))
                     {
                         Console.WriteLine("\nYou have defeated all enemies!");
                         break;
                     }
-
+                    
+                    // Enemies attack
                     Console.WriteLine("\nEnemies' turn:");
                     foreach (var enemy2 in enemies.Where(e => e.IsAlive()))
                     {
@@ -83,6 +162,10 @@ namespace DungeonExplorer
                         Environment.Exit(0);
                     }
             }
+            
+            // Progress with the game
+            PickUpItems();
+            NextRoomMenu();
         }
 
         private int CalculatePlayerDamage()
@@ -102,63 +185,30 @@ namespace DungeonExplorer
 
         private void PickUpItems()
         {
-            var weapon = new Weapon("Sword", 20);
+            bool sword = player.PlayerInventory.UsedWeapon("Sword");
+            
+            if (player.PlayerInventory.UsedWeapon("Sword"))
+            {
+                Console.WriteLine("You already have a sword. You don't pick up another one.");
+            }
+            else
+            {
+                var weapon = new Weapon("Sword", 10);
+                player.AddItem(weapon);
+            }
+            
             var potion = new Potion("Health Potion", 30);
 
-            player.AddItem(weapon);
+            
             player.AddItem(potion);
-
-            Console.WriteLine("\nYou picked up a Sword and a Health Potion.");
         }
 
-        private void ShowMenu()
+
+        private void ViewStats()
         {
-            while (true)
-            {
-                Console.WriteLine("\nMenu:");
-                Console.WriteLine("1. Go to the next room");
-                Console.WriteLine("2. View inventory and health");
-                Console.WriteLine("3. Exit game");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        GoToNextRoom();
-                        break;
-                    case "2":
-                        ViewInventoryAndHealth();
-                        break;
-                    case "3":
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice. Please try again.");
-                        break;
-                }
-            }
+            Console.WriteLine($"\nPlayer's health: {player.Health}");
+            player.PlayerInventory.InventoryContent();
         }
-        private void GoToNextRoom()
-        {
-            currentRoom = Room.GetNewRoom(currentRoom);
-            Console.WriteLine($"\nYou went to the next room. Room Description: {currentRoom.GetDescription()}");
-            enemies = GenerateEnemies();
-            ShowMenuAfterRoomTransition();
-        }
-        
-        private List<Enemy> GenerateEnemies()
-        {
-            Random rnd = new Random();
-            List<Enemy> newEnemies = new List<Enemy>();
-
-            newEnemies.Add(new Enemy("Goblin", rnd.Next(0, 31), 5));
-            newEnemies.Add(new Enemy("Orc", rnd.Next(26, 51), 10));
-            newEnemies.Add(new Enemy("Troll", rnd.Next(51, 101), 15));
-
-            return newEnemies;
-        }
-
     }
 }
     

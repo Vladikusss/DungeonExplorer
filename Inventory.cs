@@ -21,8 +21,7 @@ namespace DungeonExplorer
             items.Add(item);
             Console.WriteLine($"You Picked up: {item.Name}");
         }
-
-        public void InventoryContent()
+        public bool InventoryContent()
         { 
             // Print inventory content to the user
             Console.WriteLine("\nInventory content:");
@@ -33,6 +32,7 @@ namespace DungeonExplorer
             if (weapons.Count == 0 && potions.Count == 0)
             {
                 Console.WriteLine("\nYour inventory is empty.");
+                return false;
             }
             else
             {
@@ -47,47 +47,60 @@ namespace DungeonExplorer
                 {
                     Console.WriteLine($"|---> {item}.");
                 }
+                
+                return true;
             }
         }
 
-        public void UseItem(string itemName, Player player)
+        public void UseItem(Player player)
         {
-            // lambda to find specific item.
-            var item = items.FirstOrDefault(x => x.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+            
+            bool control = true;
+            while (control)
+            {
 
-            if (item == null)
-            {
-                Console.WriteLine($"You don't have {itemName} in your inventory.");
-            }
-            else
-            {
-                // Use an item and remove from dictionary
-                item.UseItem(player);
-                items.Remove(item);
-                Console.WriteLine($"{item.Name} was used and removed from your inventory.");
+                if (InventoryContent() == false)
+                {
+                    Console.WriteLine($"You don't have any items in your inventory.");
+                    control = false;
+                    break;
+                }
+                else
+                {
+                    // lambda to find specific item.
+                    Console.WriteLine("\nEnter the exact name of an item you wish to use.");
+                    string itemName = Console.ReadLine().ToLower();
+                    var item = items.FirstOrDefault(x => x.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+                    
+                    // Use an item and remove from dictionary
+                    if (item == null)
+                    {
+                        Console.WriteLine("Item not found.");
+                        continue; // Ask again
+                    }
+
+                    item.UseItem(player);
+
+                    // Remove an item if it's a Potion
+                    if (item is Potion)
+                    {
+                        items.Remove(item);
+                        Console.WriteLine($"{item.Name} was used and removed from your inventory.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{item.Name} is now equipped and stays in your inventory.");
+                    }
+                    control = false; 
+                    break;
+                }
             }
         }
         
-        public void UseItemFromInventory(Player player)
+        public bool UsedWeapon(string weaponName)
         {
-            Console.WriteLine("\nInventory:");
-            InventoryContent();
-
-            Console.WriteLine("\nChoose an item to use:");
-            foreach (var item in items)
-            {
-                Console.WriteLine($"{items.IndexOf(item) + 1}. {item}");
-            }
-
-            string choice = Console.ReadLine();
-            if (int.TryParse(choice, out int index) && index > 0 && index <= items.Count)
-            {
-                UseItem(items[index - 1].Name, player);
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
-            }
+            return items.OfType<Weapon>().Any(w => w.Name.Equals(weaponName, StringComparison.OrdinalIgnoreCase));
         }
+
     }
 }

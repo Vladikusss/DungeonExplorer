@@ -14,10 +14,10 @@ namespace DungeonExplorer
         public override void UseItem(Player player)
         {
             player.Health += HealAmount;
-            Console.WriteLine($"{player.Name} uses {Name} and gets {HealAmount} hp. Current Health: {player.Health}");
             if (player.Health > player.MaxHealth)
             {
                 player.Health = player.MaxHealth;
+                Console.WriteLine($"{player.Name} uses {Name} and gets {HealAmount} hp. Current Health: {player.Health}");
             }
         }
 
