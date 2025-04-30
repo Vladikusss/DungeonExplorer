@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
+// LINQ + LAMBADA
 namespace DungeonExplorer
 {
     public class Inventory : IInventory

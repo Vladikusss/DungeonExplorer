@@ -11,6 +11,12 @@ namespace DungeonExplorer
     {
         static void Main(string[] args)
         {   
+            var tests = new Testing();
+            
+            // Sample Tests
+            tests.PlayerTakesDamage();
+            tests.HealingPotion();
+            
             Game game = new Game(); // Creation of new instance of game class
             game.Start(); // Starting point of the game
             
