@@ -61,6 +61,7 @@
     <Compile Include="Room.cs" />
     <Compile Include="Statistics.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="Testing.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -94,7 +94,7 @@ namespace DungeonExplorer
             }
         }
 
-        private List<Enemy> GenerateEnemies()
+        internal List<Enemy> GenerateEnemies()
         {
             Random rnd = new Random();
             List<Enemy> newEnemies = new List<Enemy>();

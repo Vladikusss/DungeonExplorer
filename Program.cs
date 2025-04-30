@@ -10,7 +10,7 @@ namespace DungeonExplorer
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {   
             Game game = new Game(); // Creation of new instance of game class
             game.Start(); // Starting point of the game
             
