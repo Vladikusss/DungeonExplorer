@@ -3,52 +3,27 @@ using System;
 
 namespace DungeonExplorer
 {
-    public enum EnemyClass { A, B, C }
-    
-    public class Enemy
-    {
-        public string Name { get; }
-        public int Health { get; private set; }
-        public int Damage { get; }
+    public class Enemy : Creature
+    { /* Inherit from base class */
         
-        private static Random rndm = new Random();
+        public int Damage {get; set;}
+        
+        private static Random rnd = new Random();
 
-        public Enemy(EnemyClass type)
+        public Enemy(string name, int minHealth, int maxHealth, int damage) : base(name, RandomHealth(minHealth, maxHealth))
         {
-            switch (type)
-            {
-                case EnemyClass.A:
-                    Name = "Demonic Zomboid";
-                    Health = rndm.Next(40, 61); // HP 40-60
-                    Damage = 15;
-                    break;
-                case EnemyClass.B:
-                    Name = "Sneaky Goblin";
-                    Health = rndm.Next(20, 41); // HP 20-40
-                    Damage = 10;
-                    break;
-                case EnemyClass.C:
-                    Name = "Deadly Minion";
-                    Health = rndm.Next(10, 21); // HP 10-20
-                    Damage = 5;
-                    break;
-            }
-            
+            Damage = damage;
         }
 
-        public void TakeDamage(int damage)
+        private static int RandomHealth(int min, int max)
         {
-            Health -= damage;
-            if (Health <= 0)
-            {
-                Health = 0;
-            }
-            
+            return rnd.Next(min, max + 1);
         }
-
-        public bool Alive()
+        public override void Attack(Creature target)
         {
-            return Health > 0;
+            int damage = 5; // Test figure
+            Console.WriteLine($"{Name} attacks {target.Name} dealing {damage} damage!");
+            target.TakeDamage(damage);
         }
     }
 }

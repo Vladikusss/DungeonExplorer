@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace DungeonExplorer
 {
     public class Room
     {
-        private static List<Room> rooms = new List<Room>
+        internal static List<Room> rooms = new List<Room>
         {
             new Room("Large fountain of glowing red liquid can be seen in this room."),
             new Room("Dusty old books are on the shelf of this library."),
@@ -16,10 +16,9 @@ namespace DungeonExplorer
             new Room("Empty chests of treasure fill up this room"),
             new Room("Ancient stone carvings is all that you see...")
         };
-        
+
         private static Random rndmRoom = new Random();
         private string description;
-        
 
         public Room(string description)
         {
@@ -37,7 +36,7 @@ namespace DungeonExplorer
             do
             {
                 newRoom = rooms[rndmRoom.Next(rooms.Count)];
-            } 
+            }
             while (previousRoom == newRoom);
             return newRoom;
         }
